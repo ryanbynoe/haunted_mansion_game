@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, session
 from game.game_functions import handle_action
+from utils import adjust_health, check_win_condition
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for session management
