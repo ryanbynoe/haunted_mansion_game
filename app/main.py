@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, session
-from game_functions import handle_action
+from game.game_functions import handle_action
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for session management
