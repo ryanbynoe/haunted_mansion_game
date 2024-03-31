@@ -14,11 +14,24 @@
         </div>
         <div class="game-instructions">
             <p>Explore the mansion, solve puzzles, and beware of dangers.</p>
-            <p>Type your actions in the box below:</p>
+            <p>Select your action from the dropdown:</p>
         </div>
         <div class="game-action">
             <form action="/" method="post">
-                <input type="text" name="action" autofocus placeholder="What do you do?">
+                <!-- Dropdown for action selection -->
+                <select name="action" autofocus>
+                    <option value="">-- Select an action --</option>
+                    <option value="go to library">Go to Library</option>
+                    <option value="go to garden">Go to Garden</option>
+                    <option value="take flashlight">Take Flashlight</option>
+                    <option value="take key">Take Key</option>
+                    <option value="use flashlight">Use Flashlight</option>
+                    <option value="use key">Use Key</option>
+                    <option value="talk to gardener">Talk to Gardener</option>
+                    <option value="talk to ghost">Talk to Ghost</option>
+                    <option value="fight ghost">Fight Ghost</option>
+                    <!-- Additional options based on your game's logic -->
+                </select>
                 <button type="submit">Submit</button>
             </form>
         </div>
