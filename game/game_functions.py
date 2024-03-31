@@ -5,7 +5,7 @@ def handle_action(action, session):
     # Ensure the game session is initialized
     if 'current_room' not in session:
         start_new_game(session)
-    
+
     # Handle actions based on the normalized input
     if action.startswith('go to'):
         # Extract the room name directly without replacing parts of the string
@@ -16,13 +16,16 @@ def handle_action(action, session):
         return take_item(item, session)
     elif action == 'talk to gardener':
         return talk_to_gardener(session)
-    
+    elif action == 'get hint':
+        return get_hint(session)
+
     return "You're not sure what to do."
 
 def start_new_game(session):
     session['current_room'] = 'entrance'
     session['inventory'] = []
     session['health'] = 100  # Initialize health
+    session['no_take_count'] = 0  # Counter to track "There's nothing here to take." occurrences
 
 def move_rooms(room, session):
     # Room movement logic simplified to use the room variable directly
@@ -44,7 +47,12 @@ def take_item(item, session):
         session['inventory'].append('key')
         return "You found a rusty old key."
     else:
-        return "There's nothing here to take."
+        session['no_take_count'] += 1  # Increment the count
+        if session['no_take_count'] > 2:
+            session['no_take_count'] = 0  # Reset count
+            return get_hint(session)
+        else:
+            return "There's nothing here to take."
 
 def talk_to_gardener(session):
     # Dialogue logic remains unchanged
@@ -52,3 +60,14 @@ def talk_to_gardener(session):
         return "The gardener tells you about a secret passage in the library."
     else:
         return "There's no one here to talk to."
+
+def get_hint(session):
+    current_room = session.get('current_room')
+
+    # Example logic to provide hints based on the current room
+    if current_room == 'garden':
+        return "Maybe there's something hidden in the bushes. Try 'take item' to search."
+    elif current_room == 'library':
+        return "Try looking behind the bookshelves for hidden items."
+    else:
+        return "Explore your surroundings carefully to find clues."

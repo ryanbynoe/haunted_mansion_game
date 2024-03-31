@@ -14,26 +14,11 @@
         </div>
         <div class="game-instructions">
             <p>Explore the mansion, solve puzzles, and beware of dangers.</p>
-            <ul>
-                <li>To move: "go to [room name]" (e.g., "go to garden").</li>
-                <li>To pick up an item: "take [item name]" (e.g., "take flashlight").</li>
-                <li>To use an item: "use [item name]" (e.g., "use key").</li>
-                <li>To talk to someone: "talk to [NPC name]" (e.g., "talk to gardener").</li>
-                <li>To fight: "fight [enemy]" (e.g., "fight ghost" with the flashlight in your inventory).</li>
-            </ul>
-            <p>Select your action from the dropdown:</p>
+            <p>Type your actions in the box below:</p>
         </div>
         <div class="game-action">
             <form action="/" method="post">
-                <!-- Dropdown for action selection -->
-                <select name="action" autofocus>
-                    <option value="">-- Select an action --</option>
-                    <option value="go to garden">Go to Garden</option>
-                    <option value="take flashlight">Take Flashlight</option>
-                    <option value="use key">Use Key</option>
-                    <option value="talk to gardener">Talk to Gardener</option>
-                    <option value="fight ghost">Fight Ghost</option>
-                </select>
+                <input type="text" name="action" autofocus placeholder="What do you do?">
                 <button type="submit">Submit</button>
             </form>
         </div>
