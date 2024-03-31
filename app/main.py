@@ -13,7 +13,7 @@ def game():
     else:
         session.clear()  # Start a new game session
         response = "You stand at the entrance of the Haunted Mansion. Where will you go?"
-    return render_template('game.html', response=response)
+    return render_template('templates/game.html', response=response)
 
 if __name__ == '__main__':
     app.run(debug=True)
