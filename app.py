@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, request, render_template
-from your_game_module import main_game_function  # Adapt this import to your game structure
+from game_functions import main_game_function  # Adapt this import to your game structure
 
 app = Flask(__name__)
 
