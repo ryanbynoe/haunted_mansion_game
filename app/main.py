@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, session
-# Assuming game.game_functions and utils modules are correctly set up
 from game.game_functions import handle_action
 from utils import adjust_health, check_win_condition
 
@@ -9,8 +8,8 @@ app.secret_key = 'your_secret_key'  # Needed for session management
 @app.route('/', methods=['GET', 'POST'])
 def game():
     if request.method == 'POST':
-        action = request.form.get('action')
-        response = handle_action(action, session)
+        action = request.form.get('action')  # Retrieve the selected action from the form
+        response = handle_action(action, session)  # Pass the action to the handle_action function
     else:
         session.clear()  # Start a new game session, initializing necessary session variables
         session['current_room'] = 'entrance'
