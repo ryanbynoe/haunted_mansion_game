@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haunted Mansion Adventure</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userInput = document.querySelector("input[name='action']");
+            const hintsDiv = document.createElement("div");
+            hintsDiv.className = "hints";
+            userInput.parentNode.insertBefore(hintsDiv, userInput.nextSibling);
+
+            userInput.addEventListener("input", function() {
+                const input = userInput.value;
+                if(input.length > 2) { // Fetch hints for inputs longer than 2 characters.
+                    fetch("/get-hints", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ userInput: input }),
+                    })
+                    .then(response => response.json())
+                    .then(hints => {
+                        hintsDiv.innerHTML = hints.join("<br>");
+                    })
+                    .catch(error => console.error('Error fetching hints:', error));
+                } else {
+                    hintsDiv.innerHTML = ''; // Clear hints for shorter inputs.
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="game-container">

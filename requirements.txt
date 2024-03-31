@@ -2,3 +2,4 @@ Flask
 SQLAlchemy
 WTForms
 Werkzeug
+Flask-Cors
