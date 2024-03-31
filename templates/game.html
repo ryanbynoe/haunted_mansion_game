@@ -27,10 +27,12 @@
             <form action="/" method="post">
                 <!-- Dropdown for action selection -->
                 <select name="action" autofocus>
-                    <option value="">Select an action...</option>
-                    {% for action in actions %}
-                        <option value="{{ action }}">{{ action }}</option>
-                    {% endfor %}
+                    <option value="">-- Select an action --</option>
+                    <option value="go to garden">Go to Garden</option>
+                    <option value="take flashlight">Take Flashlight</option>
+                    <option value="use key">Use Key</option>
+                    <option value="talk to gardener">Talk to Gardener</option>
+                    <option value="fight ghost">Fight Ghost</option>
                 </select>
                 <button type="submit">Submit</button>
             </form>
