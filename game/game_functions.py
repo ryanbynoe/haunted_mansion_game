@@ -19,13 +19,15 @@ def handle_action(action, session):
     elif action == 'get hint':
         return get_hint(session)
 
-    return "You're not sure what to do."
+    return handle_unknown_action(session)
 
 def start_new_game(session):
     session['current_room'] = 'entrance'
     session['inventory'] = []
     session['health'] = 100  # Initialize health
     session['no_take_count'] = 0  # Counter to track "There's nothing here to take." occurrences
+    session['no_action_count'] = 0  # Counter to track "You're not sure what to do." occurrences
+    session['no_move_count'] = 0  # Counter to track "You can't move in that direction." occurrences
 
 def move_rooms(room, session):
     # Room movement logic simplified to use the room variable directly
@@ -36,7 +38,12 @@ def move_rooms(room, session):
         session['current_room'] = 'garden'
         return "You step into the garden. It's serene and beautiful."
     else:
-        return "You can't move in that direction."
+        session['no_move_count'] += 1  # Increment the count
+        if session['no_move_count'] > 2:
+            session['no_move_count'] = 0  # Reset count
+            return get_hint(session)
+        else:
+            return "You can't move in that direction."
 
 def take_item(item, session):
     # Item interaction logic simplified to use the item variable directly
@@ -60,6 +67,14 @@ def talk_to_gardener(session):
         return "The gardener tells you about a secret passage in the library."
     else:
         return "There's no one here to talk to."
+
+def handle_unknown_action(session):
+    session['no_action_count'] += 1
+    if session['no_action_count'] > 2:
+        session['no_action_count'] = 0
+        return get_hint(session)
+    else:
+        return "You're not sure what to do."
 
 def get_hint(session):
     current_room = session.get('current_room')
