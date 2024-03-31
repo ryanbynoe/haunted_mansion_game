@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haunted Mansion Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h2>Haunted Mansion Adventure</h2>
+        <div class="game-status">
+            <p><strong>Health:</strong> {{ session.get('health', 100) }}</p>
+        </div>
+        <div class="game-instructions">
+            <p>Explore the mansion, solve puzzles, and beware of dangers.</p>
+            <ul>
+                <li>To move: "go to [room name]" (e.g., "go to garden").</li>
+                <li>To pick up an item: "take [item name]" (e.g., "take flashlight").</li>
+                <li>To use an item: "use [item name]" (e.g., "use key").</li>
+                <li>To talk to someone: "talk to [NPC name]" (e.g., "talk to gardener").</li>
+                <li>To fight: "fight [enemy]" (e.g., "fight ghost" with the flashlight in your inventory).</li>
+            </ul>
+            <p>Type your actions in the box below:</p>
+        </div>
+        <div class="game-action">
+            <form action="/" method="post">
+                <input type="text" name="action" autofocus placeholder="What do you do?">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="game-response">
+            <p>{{ response }}</p>
+        </div>
+    </div>
+</body>
+</html>
